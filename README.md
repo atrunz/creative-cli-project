@@ -18,24 +18,9 @@ Your goal is to build something that **works, is organized, and shows your under
 
 ---
 
-# Theme: Everyday Systems
+# Theme: EveryDay Appliication
 
-Your project must represent a **system people use in real life**.
-
-Examples include:
-
-* Gym workout tracker
-* Budget manager
-* Habit tracker
-* Restaurant order system
-* Library checkout system
-* Task manager
-* Appointment scheduler
-* Event planner
-* Inventory manager
-* Student grade tracker
-
-These are only examples.
+Your project must represent a **system people use in real life** 
 
 You are encouraged to **get creative and build something interesting.**
 
