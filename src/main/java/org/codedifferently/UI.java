@@ -13,12 +13,8 @@ public class UI {
 
         while (running) {
             System.out.println("\n============= OPENING BAND GIG MANAGER =============");
-            System.out.println("1. View Gig Information");
-            System.out.println("2. Song");
-            System.out.println("3. Mark Gig as Complete");
-            System.out.println("4. View Upcoming Gigs");
-            System.out.println("5. View Completed Gigs");
-            System.out.println("6. View All Gigs");
+            System.out.println("1. Gig Scheduling ");
+            System.out.println("2. Band and Set Maintenance");
             System.out.println("7. Add Song/View Song Catalog");
             System.out.println("8. Generate Setlist");
             System.out.println("9. Calculate Total Earnings");
@@ -35,41 +31,14 @@ public class UI {
                     break;
 
                 case 2:
-                    viewVenueInformation();
+                    showSongMenu();
                     break;
 
                 case 3:
-                    markGigComplete();
-                    break;
-
-                case 4:
-                    bgm.viewUpcomingGigs();
-                    break;
-
-                case 5:
-                    bgm.viewCompletedGigs();
-                    break;
-
-                case 6:
-                    bgm.viewAllGigs();
-                    break;
-
-                case 7:
-                    System.out.println("Enter name of song to add to catalog: ");
-                    String song = sc.nextLine();
-                    bgm.addSongToCatalog(song);
-                    viewSongCatalog();
-                    break;
-
-                case 8:
-                    generateSetlist();
-                    break;
-
-                case 9:
                     System.out.println("Total earnings: $" + bgm.calculateTotalEarnings());
                     break;
 
-                case 10:
+                case 4:
                     running = false;
                     System.out.println("Closing Band Gig Manager...");
                     break;
@@ -119,6 +88,7 @@ public class UI {
             for (int i = 0; i < bgm.getSongCatalog().size(); i++) {
                 System.out.println((i + 1) + ". " + bgm.getSongCatalog().get(i));
             }
+            System.out.println("");
         }
     }
 
@@ -154,6 +124,7 @@ public class UI {
             System.out.println("0. Exit");
 
             int choice = sc.nextInt();
+            sc.nextLine(); //clear token
             {
                 switch (choice) {
                     case 1:
@@ -177,4 +148,43 @@ public class UI {
         }
     }while (running) ;
 }
+
+    private void showSongMenu() {
+
+        Boolean running = true;
+        do {
+            System.out.println("1. Add Song To Catalog");
+            System.out.println("2. View Song Catalog");
+            System.out.println("3. Adjust Band Lineup for a gig");
+            System.out.println("4. Generate Setlist");
+            System.out.println("0. Exit");
+
+            int choice = sc.nextInt();
+            sc.nextLine(); // clear token
+            {
+                switch (choice) {
+                    case 1:
+                        System.out.println("Enter name of song to add to catalog: ");
+                        String song = sc.nextLine();
+                        bgm.addSongToCatalog(song);
+                        viewSongCatalog();
+                        break;
+                    case 2:
+                        viewSongCatalog();
+                        break;
+                    case 3:
+                        //adjust lineup
+                        bgm.viewCompletedGigs();
+                        break;
+                    case 4:
+                        generateSetlist();
+                        break;
+                        //add something to view setlists for a gig
+                    case 0:
+                        running=false;
+                }
+
+            }
+        }while (running) ;
+    }
     }
