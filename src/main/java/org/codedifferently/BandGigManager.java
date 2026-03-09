@@ -129,7 +129,6 @@ public class BandGigManager {
             System.out.println("Invalid gig selection.");
             return;
         }
-
         System.out.println(gig);
         System.out.println("Lineup: " + gig.getLineup());
         System.out.println("Setlist: " + gig.getSetlist());
