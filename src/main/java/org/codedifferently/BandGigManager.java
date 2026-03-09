@@ -2,16 +2,34 @@ package org.codedifferently;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Scanner;
 
 public class BandGigManager {
     private ArrayList<Gig> gigs;
     private ArrayList<String> songCatalog;
     private ArrayList<String> defaultBandMembers;
+    Scanner sc = new Scanner(System.in);
 
     public BandGigManager() {
         gigs = new ArrayList<>();
         songCatalog = new ArrayList<>();
         defaultBandMembers = new ArrayList<>();
+    }
+    public void addNewGig() {
+        // Assumes your Venue class has a method like promptNewVenue()
+        Venue venue = new Venue().promptNewVenue();
+
+        System.out.print("Enter date of gig: ");
+        String date = sc.nextLine();
+
+        System.out.print("How much is the gig paying? ");
+        double payment = sc.nextDouble();
+        sc.nextLine(); // clear newline
+
+        Gig newGig = new Gig(date, venue, payment);
+        addGig(newGig);
+
+        System.out.println("Gig added successfully.");
     }
 
     public void addGig(Gig gig) {
@@ -87,6 +105,7 @@ public class BandGigManager {
 
     public void addSongToCatalog(String song) {
         songCatalog.add(song);
+        System.out.println("Song "+ song+" added to catalog.");
     }
 
     public ArrayList<String> getSongCatalog() {
@@ -111,7 +130,6 @@ public class BandGigManager {
             System.out.println("Song catalog is empty.");
             return;
         }
-
         ArrayList<String> tempSongs = new ArrayList<>(songCatalog);
         Collections.shuffle(tempSongs);
 
