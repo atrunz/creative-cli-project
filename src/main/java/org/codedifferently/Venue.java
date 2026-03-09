@@ -24,12 +24,17 @@ public class Venue {
         public Venue promptNewVenue(){
             System.out.println("Enter name of gig venue: ");
             String venueName = sc.nextLine();
+
             System.out.println("Enter name of city/state of venue: ");
             String city = sc.nextLine();
+
             System.out.println("Enter venue capacity: ");
             int capacity = sc.nextInt();
+            sc.nextLine(); // CLEAR NEWLINE
+
             System.out.println("Enter the first and last name of this venue's contact: ");
-            String contactName=sc.nextLine();
+            String contactName = sc.nextLine();
+
             System.out.println("Enter the email address of this venue's contact: ");
             String contactEmail = sc.nextLine();
             return new Venue(venueName,city,capacity,contactName,contactEmail);
