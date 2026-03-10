@@ -2,34 +2,16 @@ package org.codedifferently;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Scanner;
 
 public class BandGigManager {
-    private ArrayList<Gig> gigs;
-    private ArrayList<String> songCatalog;
-    private ArrayList<String> defaultBandMembers;
-    Scanner sc = new Scanner(System.in);
+    private final ArrayList<Gig> gigs;
+    private final ArrayList<String> songCatalog;
+    private final ArrayList<String> defaultBandMembers;
 
     public BandGigManager() {
         gigs = new ArrayList<>();
         songCatalog = new ArrayList<>();
         defaultBandMembers = new ArrayList<>();
-    }
-    public void addNewGig() {
-        // Assumes your Venue class has a method like promptNewVenue()
-        Venue venue = new Venue().promptNewVenue();
-
-        System.out.print("Enter date of gig: ");
-        String date = sc.nextLine();
-
-        System.out.print("How much is the gig paying? ");
-        double payment = sc.nextDouble();
-        sc.nextLine(); // clear newline
-
-        Gig newGig = new Gig(date, venue, payment);
-        addGig(newGig);
-
-        System.out.println("Gig added successfully.");
     }
 
     public void addGig(Gig gig) {
@@ -45,6 +27,17 @@ public class BandGigManager {
             return gigs.get(index);
         }
         return null;
+    }
+
+    public boolean markGigCompleteByIndex(int index) {
+        Gig gig = findGigByIndex(index);
+
+        if (gig == null) {
+            return false;
+        }
+
+        gig.markCompleted();
+        return true;
     }
 
     public void viewAllGigs() {
@@ -92,7 +85,7 @@ public class BandGigManager {
     }
 
     public double calculateTotalEarnings() {
-        double total = 0;
+        double total = 0.0;
 
         for (Gig gig : gigs) {
             if (gig.isCompleted()) {
@@ -105,7 +98,6 @@ public class BandGigManager {
 
     public void addSongToCatalog(String song) {
         songCatalog.add(song);
-        System.out.println("Song "+ song+" added to catalog.");
     }
 
     public ArrayList<String> getSongCatalog() {
@@ -127,9 +119,9 @@ public class BandGigManager {
 
     public void generateSetlistForGig(Gig gig, int numberOfSongs) {
         if (songCatalog.isEmpty()) {
-            System.out.println("Song catalog is empty.");
             return;
         }
+
         ArrayList<String> tempSongs = new ArrayList<>(songCatalog);
         Collections.shuffle(tempSongs);
 
@@ -140,7 +132,38 @@ public class BandGigManager {
         }
     }
 
-    //unused currently
+    public boolean generateSetlistForGigByIndex(int index, int numberOfSongs) {
+        Gig gig = findGigByIndex(index);
+
+        if (gig == null || gig.isCompleted() || songCatalog.isEmpty()) {
+            return false;
+        }
+
+        generateSetlistForGig(gig, numberOfSongs);
+        return true;
+    }
+
+    public boolean addSongToGigSetlist(int gigIndex, String song) {
+        Gig gig = findGigByIndex(gigIndex);
+
+        if (gig == null || gig.isCompleted()) {
+            return false;
+        }
+
+        gig.addSong(song);
+        return true;
+    }
+
+    public String removeSongFromGigSetlist(int gigIndex, int songIndex) {
+        Gig gig = findGigByIndex(gigIndex);
+
+        if (gig == null || gig.isCompleted()) {
+            return null;
+        }
+
+        return gig.removeSongAtIndex(songIndex);
+    }
+
     public void viewGigDetails(int index) {
         Gig gig = findGigByIndex(index);
 
@@ -148,6 +171,7 @@ public class BandGigManager {
             System.out.println("Invalid gig selection.");
             return;
         }
+
         System.out.println(gig);
         System.out.println("Lineup: " + gig.getLineup());
         System.out.println("Setlist: " + gig.getSetlist());

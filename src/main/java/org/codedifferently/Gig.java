@@ -109,6 +109,13 @@ public class Gig {
         }
     }
 
+    public String removeSongAtIndex(int index) {
+        if (index >= 0 && index < setlist.size()) {
+            return setlist.remove(index);
+        }
+        return null;
+    }
+
     @Override
     public String toString() {
         return "Date: " + date +
