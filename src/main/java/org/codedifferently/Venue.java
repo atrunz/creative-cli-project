@@ -14,6 +14,7 @@ public class Venue {
         this.capacity = capacity;
     }
 
+    //getters and setters
     public String getName() {
         return name;
     }
