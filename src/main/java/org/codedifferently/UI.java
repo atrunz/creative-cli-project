@@ -18,7 +18,7 @@ public class UI {
             System.out.println("2. Song and Setlist Maintenance");
             System.out.println("3. Band Lineup");
             System.out.println("4. Calculate Total Earnings");
-            System.out.println("5. Exit");
+            System.out.println("0. Exit");
             System.out.println("====================================================");
             System.out.print("Select option: ");
 
@@ -37,7 +37,7 @@ public class UI {
                 case 4:
                     System.out.println("Total earnings: $" + bgm.calculateTotalEarnings());
                     break;
-                case 5:
+                case 0:
                     running = false;
                     System.out.println("Closing Band Gig Manager...");
                     break;
@@ -56,7 +56,7 @@ public class UI {
             System.out.println("2. View Upcoming Gigs");
             System.out.println("3. View Completed Gigs");
             System.out.println("4. View All Gigs");
-            System.out.println("5. View Venue Information");
+            System.out.println("5. View Gig Details");
             System.out.println("6. Mark Gig Completed");
             System.out.println("0. Exit");
             System.out.println("======================================");
@@ -78,7 +78,7 @@ public class UI {
                     bgm.viewAllGigs();
                     break;
                 case 5:
-                    viewVenueInformation();
+                    viewGigDetails();
                     break;
                 case 6:
                     markGigComplete();
@@ -262,6 +262,8 @@ public class UI {
             return;
         }
 
+
+
         Gig gig = bgm.findGigByIndex(gigIndex);
 
         if (gig.getSetlist().isEmpty()) {
@@ -273,6 +275,23 @@ public class UI {
         for (int i = 0; i < gig.getSetlist().size(); i++) {
             System.out.println((i + 1) + ". " + gig.getSetlist().get(i));
         }
+    }
+
+    private void viewGigDetails() {
+        if (bgm.getGigs().isEmpty()) {
+            System.out.println("No gigs available.");
+            return;
+        }
+
+        System.out.println("Select a gig to view details:");
+        bgm.viewAllGigs();
+
+        int gigIndex = promptForGigIndex("Enter gig number: ");
+        if (gigIndex == -1) {
+            return;
+        }
+
+        bgm.viewGigDetails(gigIndex);
     }
 
     private void addSongToGigSetlist() {
@@ -370,7 +389,7 @@ public class UI {
             System.out.println("2. Add Band Member");
             System.out.println("3. Remove Band Member");
             System.out.println("4. Swap Band Member");
-            System.out.println("5. Return to Main Menu");
+            System.out.println("0. Return to Main Menu");
             System.out.print("Select option: ");
 
             int choice = InputHandler.handleIntegerInput(sc);
@@ -402,7 +421,7 @@ public class UI {
                     gig.swapBandMember(oldMember, newMember);
                     System.out.println("Band member swapped for this gig.");
                     break;
-                case 5:
+                case 0:
                     editing = false;
                     break;
                 default:
