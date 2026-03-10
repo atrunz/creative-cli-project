@@ -12,6 +12,10 @@ public class BandGigManager {
         gigs = new ArrayList<>();
         songCatalog = new ArrayList<>();
         defaultBandMembers = new ArrayList<>();
+        defaultBandMembers.add("Alex");
+        defaultBandMembers.add("Jonny");
+        defaultBandMembers.add("Bailey");
+        defaultBandMembers.add("Matty");
     }
 
     public void addGig(Gig gig) {
