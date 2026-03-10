@@ -3,6 +3,8 @@ package org.codedifferently;
 import java.util.ArrayList;
 
 public class Gig {
+    //used private fields to limit accessibility as much as possible
+    //fulfilling encapsulation principles
     private String date;
     private Venue venue;
     private double payment;
@@ -10,12 +12,14 @@ public class Gig {
     private ArrayList<String> lineup;
     private ArrayList<String> setlist;
 
+    //constructor no arguments
     public Gig() {
         lineup = new ArrayList<>();
         setlist = new ArrayList<>();
-        completed = false;
+        completed = false; //completed defaults to false, gig has to be manually logged as complete
     }
 
+    //alternate constructor
     public Gig(String date, Venue venue, double payment) {
         this.date = date;
         this.venue = venue;
@@ -25,10 +29,12 @@ public class Gig {
         this.setlist = new ArrayList<>();
     }
 
+    //getter
     public String getDate() {
         return date;
     }
 
+    //setter
     public void setDate(String date) {
         this.date = date;
     }
@@ -74,10 +80,12 @@ public class Gig {
     }
 
 
+    //add to arraylist
     public void addBandMember(String member) {
         lineup.add(member);
     }
 
+    //remove from arraylist
     public void removeBandMember(String member) {
         lineup.remove(member);
     }
@@ -86,14 +94,17 @@ public class Gig {
         setlist.add(song);
     }
 
+    //remove all from setlist arraylist
     public void clearSetlist() {
         setlist.clear();
     }
 
+    //update completed boolean to true
     public void markCompleted() {
         completed = true;
     }
 
+    //tells us whether completed boolean is true or false
     public String getStatus() {
         if (completed) {
             return "Completed";
@@ -101,6 +112,7 @@ public class Gig {
         return "Scheduled";
     }
 
+    //update index of lineup arraylist
     public void swapBandMember(String oldMember, String newMember) {
         int index = lineup.indexOf(oldMember);
 
@@ -109,6 +121,7 @@ public class Gig {
         }
     }
 
+    //remove item at index in setlist arraylist
     public String removeSongAtIndex(int index) {
         if (index >= 0 && index < setlist.size()) {
             return setlist.remove(index);
