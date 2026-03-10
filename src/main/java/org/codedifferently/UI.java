@@ -15,7 +15,7 @@ public class UI {
         boolean running = true;
 
         while (running) {
-            System.out.println("\n============= OPENING BAND GIG MANAGER =============");
+            System.out.println("\n============= BAND GIG MANAGER =============");
             System.out.println("1. Gig Scheduling");
             System.out.println("2. Song and Setlist Maintenance");
             System.out.println("3. Band Lineup");
